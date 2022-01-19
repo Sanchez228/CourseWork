@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="CourseWork.View.UserControls.ReservationCanvasUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CourseWork.View.UserControls"
+             xmlns:viewmodel="clr-namespace:CourseWork.ViewModel" 
+             d:DataContext="{d:DesignInstance Type=viewmodel:ReservationCanvasVM}"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="900"
+              xmlns:intr="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" >
+
+    <DockPanel>
+        <Grid x:Name="headerGrid"                
+            DockPanel.Dock="Top" 
+            Height="50">
+
+            <DockPanel Width="150"
+                HorizontalAlignment="Center">
+                <Button 
+                    Cursor="Hand"
+                    IsEnabled="{Binding IsEnabledPrevBtn}"
+                    DockPanel.Dock="Left" 
+                    Content="Previous week" >   
+                    <intr:Interaction.Triggers>
+                        <intr:EventTrigger EventName="Click">
+                            <intr:InvokeCommandAction Command="{Binding PrevBtnClick}"/>
+                        </intr:EventTrigger>
+                    </intr:Interaction.Triggers>
+                </Button>
+                <Button 
+                    Cursor="Hand"
+                    DockPanel.Dock="Right" 
+                    Content="Next week" 
+                    IsEnabled="{Binding IsEnabledNextBtn}"
+                    >
+                    <intr:Interaction.Triggers>
+                        <intr:EventTrigger EventName="Click">
+                            <intr:InvokeCommandAction Command="{Binding NextBtnClick}"/>
+                        </intr:EventTrigger>
+                    </intr:Interaction.Triggers>
+                </Button>
+            </DockPanel>
+            <TextBlock Text="Meet Room" 
+                       VerticalAlignment="Top" 
+                       FontSize="24"
+                       FontWeight="Bold" Margin="10,4,-10,0"/>
+
+            <Image  Source="{Binding UserIconPath}"
+                    Width="100" 
+                    HorizontalAlignment="Right"
+                    />
+            <TextBlock Text="{Binding UserNickname}" 
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"
+                       Margin="0,0,100,0"/>
+        </Grid>
+
+
+        <StackPanel x:Name="hours"
+            DockPanel.Dock="Left" 
+            Width="100" Margin="0,60,0,0" >
+        </StackPanel>
+
+        <ContentControl Margin="0,20,0,0" Content="{Binding CurrentUserControl}"/>
+
+    </DockPanel>
+</UserControl>
